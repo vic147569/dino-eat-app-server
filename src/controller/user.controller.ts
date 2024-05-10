@@ -9,10 +9,12 @@ class UserController {
       const { auth0Id } = req.body
       const existingUser = await User.findOne({ auth0Id })
 
+      // user exist
       if (existingUser) {
         return res.status(200).send()
       }
 
+      // user not exist -> create a user
       const newUser = new User(req.body)
       await newUser.save()
 
