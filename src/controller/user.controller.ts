@@ -24,6 +24,28 @@ class UserController {
       res.status(500).json({ message: 'Create user fail' })
     }
   }
+
+  async update(req: Request, res: Response) {
+    try {
+      const { name, addressLine1, country, city } = req.body
+      const user = await User.findById(req.userId)
+      if (!user) {
+        res.status(404).json({ message: 'User not found' })
+      }
+
+      if (user) {
+        user.name = name
+        user.addressLine1 = addressLine1
+        user.country = country
+        user.city = city
+        await user.save()
+        res.send(user)
+      }
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ message: 'Fail to create user' })
+    }
+  }
 }
 
 export default new UserController()
