@@ -26,7 +26,7 @@ export const jwtParse = async (
   try {
     const decoded = jwt.decode(token) as jwt.JwtPayload
     const auth0Id = decoded.sub
-    const user = await User.findOne({ auth0Id })
+    const user = await User.findOne({ auth0Id }).orFail()
 
     if (!user) {
       res.sendStatus(401)
@@ -34,7 +34,7 @@ export const jwtParse = async (
 
     if (user) {
       req.auth0Id = auth0Id as string
-      req.userId = user._id.toString()
+      req.userId = user._id!.toString()
     }
     next()
   } catch (error) {

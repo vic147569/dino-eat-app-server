@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(() => {
 })
 
 app.get('/test', (req: Request, res: Response) => {
-  res.json({
+  res.send({
     message: 'hello !!'
   })
 })
