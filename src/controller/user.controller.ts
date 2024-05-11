@@ -1,6 +1,21 @@
 import User from '@/models/user'
 import { Request, Response } from 'express'
 class UserController {
+  async get(req: Request, res: Response) {
+    try {
+      const currentUser = await User.findOne({ _id: req.userId })
+
+      if (!currentUser) {
+        res.status(404).json({ message: 'User not found' })
+      }
+
+      res.json(currentUser)
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ message: 'Something went wrong' })
+    }
+  }
+
   async create(req: Request, res: Response) {
     // 1. check user exist ?
     // 2.create user if not exxist

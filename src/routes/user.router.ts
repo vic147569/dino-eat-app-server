@@ -5,6 +5,7 @@ import { validateMyUserRequest } from '@/middleware/validation'
 
 const userRouter = express.Router()
 
+userRouter.get('/', jwtCheck, jwtParse, userController.get)
 userRouter.post('/', jwtCheck, userController.create)
 userRouter.put(
   '/',
