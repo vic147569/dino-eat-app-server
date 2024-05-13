@@ -14,6 +14,8 @@ const upload = multer({
   }
 })
 
+restaurantRouter.get('/', jwtCheck, jwtParse, restaurantController.get)
+
 restaurantRouter.post(
   '/',
   upload.single('imageFile'),

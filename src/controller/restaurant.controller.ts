@@ -4,6 +4,19 @@ import { v2 as cloudinary } from 'cloudinary'
 import mongoose from 'mongoose'
 
 class RestaurantController {
+  async get(req: Request, res: Response) {
+    try {
+      const restaurant = await Restaurant.findOne({ user: req.userId })
+      if (!restaurant) {
+        res.status(404).json({ message: 'Cannot find restaurant' })
+      }
+      res.json(restaurant)
+    } catch (error) {
+      console.log('error', error)
+      res.status(500).json({ message: 'Failed to gget restaurant' })
+    }
+  }
+
   async create(req: Request, res: Response) {
     try {
       const existingRestaurant = await Restaurant.findOne({ user: req.userId })
