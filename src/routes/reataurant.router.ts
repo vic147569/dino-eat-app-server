@@ -25,4 +25,13 @@ restaurantRouter.post(
   restaurantController.create
 )
 
+restaurantRouter.put(
+  '/',
+  upload.single('imageFile'),
+  validateMyRestaurantRequest,
+  jwtCheck,
+  jwtParse,
+  restaurantController.update
+)
+
 export default restaurantRouter
