@@ -2,16 +2,16 @@ import express, { Request, Response } from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import mongoose from 'mongoose'
-import userRouter from './routes/user.router'
 import { v2 as cloudinary } from 'cloudinary'
-import restaurantRouter from './routes/reataurant.router'
+import myUserRouter from './routes/myUser.router'
+import myRestaurantRouter from './routes/myRestaurant.router'
 
 const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use('/api/my/user', userRouter)
-app.use('/api/my/restaurant', restaurantRouter)
+app.use('/api/my/user', myUserRouter)
+app.use('/api/my/restaurant', myRestaurantRouter)
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string).then(() => {
   console.log('connect to MongoDB success!')

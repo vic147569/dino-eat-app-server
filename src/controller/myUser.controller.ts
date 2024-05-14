@@ -1,6 +1,6 @@
 import User from '@/models/user'
 import { Request, Response } from 'express'
-class UserController {
+class MyUserController {
   async get(req: Request, res: Response) {
     try {
       const currentUser = await User.findOne({ _id: req.userId })
@@ -63,4 +63,4 @@ class UserController {
   }
 }
 
-export default new UserController()
+export default new MyUserController()

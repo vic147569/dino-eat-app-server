@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 import { v2 as cloudinary } from 'cloudinary'
 import mongoose from 'mongoose'
 
-class RestaurantController {
+class MyRestaurantController {
   async get(req: Request, res: Response) {
     try {
       const restaurant = await Restaurant.findOne({ user: req.userId })
@@ -81,4 +81,4 @@ const uploadImage = async (file: Express.Multer.File) => {
   return uploadResponse.url
 }
 
-export default new RestaurantController()
+export default new MyRestaurantController()

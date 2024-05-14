@@ -1,10 +1,10 @@
-import restaurantController from '@/controller/restaurant.controller'
+import myRestaurantController from '@/controller/myRestaurant.controller'
 import { jwtCheck, jwtParse } from '@/middleware/auth'
 import { validateMyRestaurantRequest } from '@/middleware/validation'
 import express from 'express'
 import multer from 'multer'
 
-const restaurantRouter = express.Router()
+const myRestaurantRouter = express.Router()
 
 const storage = multer.memoryStorage()
 const upload = multer({
@@ -14,24 +14,24 @@ const upload = multer({
   }
 })
 
-restaurantRouter.get('/', jwtCheck, jwtParse, restaurantController.get)
+myRestaurantRouter.get('/', jwtCheck, jwtParse, myRestaurantController.get)
 
-restaurantRouter.post(
+myRestaurantRouter.post(
   '/',
   upload.single('imageFile'),
   validateMyRestaurantRequest,
   jwtCheck,
   jwtParse,
-  restaurantController.create
+  myRestaurantController.create
 )
 
-restaurantRouter.put(
+myRestaurantRouter.put(
   '/',
   upload.single('imageFile'),
   validateMyRestaurantRequest,
   jwtCheck,
   jwtParse,
-  restaurantController.update
+  myRestaurantController.update
 )
 
-export default restaurantRouter
+export default myRestaurantRouter
