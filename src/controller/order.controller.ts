@@ -110,6 +110,20 @@ class OrderController {
     }
     res.status(200).send()
   }
+
+  // get order
+  async getMyOrders(req: Request, res: Response) {
+    try {
+      const orders = await Order.find({ user: req.userId })
+        .populate('restaurant')
+        .populate('user')
+
+      res.json(orders)
+    } catch (error) {
+      console.log(error)
+      res.status(500).json('Something went wrong')
+    }
+  }
 }
 
 const createLineItems = (
