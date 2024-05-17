@@ -11,6 +11,7 @@ import orderRouter from './routes/order.router'
 const app = express()
 
 app.use(cors())
+app.use('/api/order/checkout/webhook', express.raw({ type: '*/*' })) // get raw data
 app.use(express.json())
 app.use('/api/my/user', myUserRouter)
 app.use('/api/my/restaurant', myRestaurantRouter)
