@@ -7,7 +7,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL as string
 
 type CheckoutSessionRequest = {
   cartItems: {
-    menuItemID: string
+    menuItemId: string
     name: string
     quantity: string
   }[]
@@ -65,11 +65,11 @@ const createLineItems = (
   // 3. retur line item array
   const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
     const menuItem = menuItems.find(
-      (item) => item._id.toString() === cartItem.menuItemID.toString()
+      (item) => item._id.toString() === cartItem.menuItemId.toString()
     )
 
     if (!menuItem) {
-      throw new Error(`Menu item not found ${cartItem.menuItemID}`)
+      throw new Error(`Menu item not found ${cartItem.menuItemId}`)
     }
 
     const line_item: Stripe.Checkout.SessionCreateParams.LineItem = {
