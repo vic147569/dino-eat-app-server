@@ -66,6 +66,13 @@ class OrderController {
       res.status(500).json({ message: 'Something went wrong' })
     }
   }
+
+  async stripeWebhookHandler(req: Request, res: Response) {
+    console.log('recieved event')
+    console.log('==============')
+    console.log('event', req.body)
+    res.send()
+  }
 }
 
 const createLineItems = (
