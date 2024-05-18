@@ -41,7 +41,7 @@ class OrderController {
       const newOrder = new Order({
         restaurant: restaurant,
         user: req.userId,
-        status: 'placed',
+        status: 'inProgress',
         deliveryDetails: checkoutSessionRequest.deliveryDetails,
         cartItems: checkoutSessionRequest.cartItems,
         createdAt: new Date()
@@ -102,7 +102,7 @@ class OrderController {
         return res.status(404).json({ message: 'Order not found' })
       }
       // update paid amount and status
-      order.totalAmout = event.data.object.amount_total
+      order.totalAmount = event.data.object.amount_total
       order.status = 'paid'
 
       // update order
