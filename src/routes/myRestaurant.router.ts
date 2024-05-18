@@ -34,4 +34,11 @@ myRestaurantRouter.put(
   myRestaurantController.update
 )
 
+myRestaurantRouter.get(
+  '/order',
+  jwtCheck,
+  jwtParse,
+  myRestaurantController.getMyRestaurantOrders
+)
+
 export default myRestaurantRouter
