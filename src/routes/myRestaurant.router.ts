@@ -41,4 +41,11 @@ myRestaurantRouter.get(
   myRestaurantController.getMyRestaurantOrders
 )
 
+myRestaurantRouter.patch(
+  '/order/:orderId/status',
+  jwtCheck,
+  jwtParse,
+  myRestaurantController.updateOrderStatus
+)
+
 export default myRestaurantRouter

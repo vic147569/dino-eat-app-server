@@ -88,6 +88,38 @@ class MyRestaurantController {
       res.status(500).json({ message: 'something went wrong' })
     }
   }
+
+  async updateOrderStatus(req: Request, res: Response) {
+    try {
+      const { orderId } = req.params
+      const { status } = req.body
+
+      // query order
+      const order = await Order.findById(orderId)
+
+      // order not found
+      if (!order) {
+        return res.status(404).json({ message: 'Order not found' })
+      }
+
+      // query restaurant by order.restaurant
+      const restaurant = await Restaurant.findById(order.restaurant)
+
+      // check user is the owner of the restaurant ?
+      if (restaurant?.user?._id.toString() !== req.userId) {
+        return res.status(401).send()
+      }
+
+      // update order
+      order.status = status
+      await order.save()
+
+      res.status(200).json(order)
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ message: 'Unable to update order' })
+    }
+  }
 }
 
 const uploadImage = async (file: Express.Multer.File) => {
