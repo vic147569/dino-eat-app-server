@@ -41,7 +41,7 @@ class OrderController {
       const newOrder = new Order({
         restaurant: restaurant,
         user: req.userId,
-        status: 'inProgress',
+        status: 'placed',
         deliveryDetails: checkoutSessionRequest.deliveryDetails,
         cartItems: checkoutSessionRequest.cartItems,
         createdAt: new Date()
